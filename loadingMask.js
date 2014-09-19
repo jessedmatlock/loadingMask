@@ -5,12 +5,16 @@
 		$.fn.loadingMask = function(options) {
 			var defaults = {
 				image : 'images/loading-dots.gif',
+				//image: '',
+				bgcolor : '#F3F3F3',
+				opacity : 98,
 				func : null,
 				text : 'Processing...'
 			};
 			options = $.extend(defaults, options);
-			options.opacity =  0.85;
-			options.bgcolor = '#F3F3F3';
+			options.opacity = options.opacity ? '0.'+options.opacity.toString() : 0.85;
+			options.bgcolor = options.bgcolor ? options.bgcolor : '#F3F3F3';
+
 
 			return this.each( function() {
 				
@@ -74,10 +78,13 @@
 					$parent.addClass('mask-parent');
 
 					// Add the loading div, give it an id & position it over the parent.
-					$mask.show();					
+					$mask.show();
+					
+					
 				}
-				// fire callback function, if it exists
+
                 if(options.func) { options.func();}
+
 			});			
 		},
     $.fn.hideMask = function () {
@@ -88,5 +95,6 @@
         if(this.mask) {
             jQuery('body').find('.mask').hide();
         }
+
   	}
 })(jQuery);
